@@ -3,142 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS BIO - Creating a Biocomputer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>NEXUS - Kinematyka Ramienia</title>
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap](https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap)" rel="stylesheet">
+    <!-- Podłączenie zewnętrznego pliku CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- SECTION 1: HERO (Inspirowane górnym panelem p3) -->
-    <header class="site-header">
-        <div class="logo">NEXUS</div>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
+    <!-- GŁÓWNY EKRAN (100vh) -->
+    <div class="dashboard">
+        <!-- HEADER -->
+        <header class="top-bar glass-panel">
+            <div class="logo-area">
+                <span class="icon-logo">⬢</span>
+                <h1>NEXUS // KINEMATYKA</h1>
+            </div>
+            <div class="global-stats">
+                <div class="stat"><span>TRYB PRACY</span><br><strong class="text-glow">ANATOMIA</strong></div>
+                <div class="stat"><span>ZASILANIE</span><br><strong>AKTYWNE</strong></div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- LEFT PANEL -->
+            <aside class="panel glass-panel left-panel">
+                <div class="panel-section">
+                    <h3>KOMPONENTY RAMIENIA</h3>
+                    <ul class="module-list">
+                        <li data-target="node-base"><span>01</span> Baza & Zasilanie</li>
+                        <li data-target="node-motor" class="active"><span>02</span> Serwomotor AC (Oś 1)</li>
+                        <li data-target="node-gearbox"><span>03</span> Przekładnia Falowa</li>
+                        <li data-target="node-effector"><span>04</span> Efektor & Sensory</li>
+                    </ul>
+                </div>
+                
+                <div class="panel-section" style="margin-top: auto;">
+                    <h3>OBCIĄŻENIE ZWIĄZKÓW (Kinematyka)</h3>
+                    <div class="mini-chart">
+                        <div class="bar-row"><span class="label">OŚ 1</span><div class="bar-wrap"><div class="bar" style="width: 90%"></div></div></div>
+                        <div class="bar-row"><span class="label">OŚ 2</span><div class="bar-wrap"><div class="bar" style="width: 65%"></div></div></div>
+                        <div class="bar-row"><span class="label">OŚ 3</span><div class="bar-wrap"><div class="bar" style="width: 40%"></div></div></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CENTER DIAGRAM (Stylizowane Ramię Robota) -->
+            <main class="diagram-container glass-panel">
+                <svg viewBox="0 0 800 600" class="robot-svg" preserveAspectRatio="xMidYMid meet">
+                    <!-- Delikatne tło siatki -->
+                    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.05)"/>
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+
+                    <!-- RAMIĘ ROBOTA (Miękkie, zaokrąglone kształty) -->
+                    <g class="robot-arm" stroke="#334155" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                        <!-- Podstawa -->
+                        <path d="M 400 500 L 400 450" stroke="#1e293b" stroke-width="60"/>
+                        <!-- Ramię dolne -->
+                        <path d="M 400 450 Q 400 350 350 250" />
+                        <!-- Ramię górne -->
+                        <path d="M 350 250 Q 300 150 450 150" />
+                        <!-- Połączenie do efektora -->
+                        <path d="M 450 150 L 520 180" stroke-width="20" />
+                    </g>
+
+                    <!-- INTERAKTYWNE WĘZŁY (Hotspoty) -->
+                    <!-- Baza -->
+                    <g id="node-base" class="interactive-node">
+                        <circle cx="400" cy="480" r="35" class="node-bg" />
+                        <circle cx="400" cy="480" r="15" class="node-core" />
+                        <text x="450" y="485" class="node-label">BAZA</text>
+                    </g>
+
+                    <!-- Silnik / Oś 1 -->
+                    <g id="node-motor" class="interactive-node active">
+                        <circle cx="400" cy="400" r="25" class="node-bg" />
+                        <circle cx="400" cy="400" r="10" class="node-core" />
+                        <text x="340" y="405" class="node-label">SERWO AC</text>
+                    </g>
+
+                    <!-- Przekładnia -->
+                    <g id="node-gearbox" class="interactive-node">
+                        <circle cx="350" cy="250" r="30" class="node-bg" />
+                        <circle cx="350" cy="250" r="12" class="node-core" />
+                        <text x="270" y="255" class="node-label">PRZEKŁADNIA</text>
+                    </g>
+
+                    <!-- Efektor -->
+                    <g id="node-effector" class="interactive-node">
+                        <circle cx="520" cy="180" r="20" class="node-bg" />
+                        <circle cx="520" cy="180" r="8" class="node-core" />
+                        <text x="570" y="185" class="node-label">EFEKTOR</text>
+                    </g>
+                </svg>
+            </main>
+
+            <!-- RIGHT PANEL (Quick Preview) -->
+            <aside class="panel glass-panel right-panel">
+                <div class="panel-header">
+                    <span class="tag" id="preview-tag">NAPĘD</span>
+                    <h2 id="preview-title">Serwomotor AC (Bezszczotkowy)</h2>
+                </div>
+                
+                <p class="desc-text" id="preview-desc">
+                    Silnik prądu przemiennego z precyzyjną kontrolą pozycji (enkoder absolutny) i sprzężeniem zwrotnym wysokiej rozdzielczości.
+                </p>
+
+                <div class="action-area" style="margin-top: auto;">
+                    <button class="btn-primary rounded-btn" id="scroll-btn">ZOBACZ PROJEKT SILNIKA ↓</button>
+                </div>
+            </aside>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-container">
-                <div class="hero-left">
-                    <span class="subtitle-tag">HACKING THE CELL</span>
-                    <h1 class="hero-title">Creating a<br>Biocomputer</h1>
-                    <a href="#" class="btn-action">WATCH VIDEO <span class="arrow">→</span></a>
-                    
-                    <div class="carousel-controls">
-                        <button class="ctrl-btn prev">←</button>
-                        <button class="ctrl-btn next">→</button>
+    <!-- SEKCJA SZCZEGÓŁÓW (Poniżej ekranu głównego) -->
+    <section id="product-details" class="details-section">
+        <div class="details-content-wrapper">
+            <div class="details-header">
+                <span class="tech-label">ANALIZA KOMPONENTU</span>
+                <h2 id="detail-main-title">Serwomotor AC & Precyzyjna Kontrola</h2>
+            </div>
+
+            <div class="details-grid">
+                <!-- LEWA STRONA: Obrazek Silnika -->
+                <div class="image-column">
+                    <div class="image-container" id="detail-image-box">
+                        <!-- Świecący placeholder symulujący zdjęcie z referencji -->
+                        <div class="glow-effect"></div>
+                        
+                        <!-- TUTAJ MOŻESZ WSTAWIĆ SWOJE ZDJĘCIE (np. src="img/image_46c403.jpg"). Jeśli wstawisz ścieżkę, zmień display na "block" a placeholder poniżej na "none" -->
+                        <img src="" alt="" id="dynamic-img" style="display:none; width:100%; height:100%; object-fit:cover; border-radius: 16px; position: relative; z-index: 5;">
+                        
+                        <div class="placeholder-content">
+                            <span class="placeholder-icon">⚡</span>
+                            <span class="blueprint-text" id="blueprint-text">WIZUALIZACJA: NAPĘD</span>
+                            <p style="font-size: 11px; opacity: 0.5; margin-top: 10px;">(Miejsce na plik graficzny silnika)</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="hero-right">
-                    <!-- Wielowarstwowa struktura organiczna emulująca render z p3 -->
-                    <div class="biomorphic-container">
-                        <div class="blob-core"></div>
-                        <div class="blob-glow-1"></div>
-                        <div class="blob-glow-2"></div>
-                        <div class="blob-particle p1"></div>
-                        <div class="blob-particle p2"></div>
+
+                <!-- PRAWA STRONA: Opis -->
+                <div class="info-column">
+                    <div class="info-card glass-panel">
+                        <h3>ZASADA DZIAŁANIA</h3>
+                        <p id="detail-full-desc" class="desc-text-large">
+                            Wysokoobrotowy serwomotor AC z 3-fazowym zasilaniem. Dzięki wykorzystaniu enkodera absolutnego (szklana tarcza i sensor optyczny), układ zapewnia bezbłędne śledzenie pozycji kątowej nawet po zaniku zasilania. Zamknięta pętla sprzężenia zwrotnego (Feedback Loop) pozwala na ekstremalnie precyzyjne sterowanie ramieniem robota, minimalizując drgania i maksymalizując moment obrotowy.
+                        </p>
                     </div>
-                    <div class="page-indicator">01 <span>/ 05</span></div>
+
+                    <div class="specs-grid" id="detail-specs-grid">
+                        <div class="spec-item glass-panel">
+                            <span class="spec-label">ZASILANIE</span>
+                            <span class="spec-val">3-Phase AC</span>
+                        </div>
+                        <div class="spec-item glass-panel">
+                            <span class="spec-label">ENKODER</span>
+                            <span class="spec-val">Optyczny (Abs.)</span>
+                        </div>
+                        <div class="spec-item glass-panel">
+                            <span class="spec-label">CHŁODZENIE</span>
+                            <span class="spec-val">Radiator & Finy</span>
+                        </div>
+                        <div class="spec-item glass-panel">
+                            <span class="spec-label">ZASTOSOWANIE</span>
+                            <span class="spec-val">Oś Kinematyczna</span>
+                        </div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn-primary rounded-btn">PEŁNA DOKUMENTACJA</button>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 2: COLUMNS / FEATURES (Inspirowane środkowym panelem p3) -->
-        <section class="features-section">
-            <div class="features-grid">
-                
-                <div class="feature-col">
-                    <div class="col-top">
-                        <span class="col-num">01</span>
-                        <div class="col-icon">
-                            <!-- DNA / Bio Icon -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4.5 10.5C4.5 7.46243 6.96243 5 10.5 5C13.5376 5 16 7.46243 16 10.5C16 13.5376 13.5376 16 10.5 16" />
-                                <path d="M19.5 13.5C19.5 16.5376 17.0376 19 13.5 19C10.4624 19 8 16.5376 8 13.5C8 10.4624 10.4624 8 13.5 8" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-bottom">
-                        <h3 class="col-title">Product</h3>
-                        <a href="#" class="col-link">WATCH VIDEO</a>
-                        <div class="col-arrow">↓</div>
-                    </div>
-                </div>
-
-                <div class="feature-col">
-                    <div class="col-top">
-                        <span class="col-num">02</span>
-                        <div class="col-icon">
-                            <!-- Neuro / Pulse Icon -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M3 12H7L10 19L14 5L17 12H21" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-bottom">
-                        <h3 class="col-title">Performance</h3>
-                        <a href="#" class="col-link">OUR RESULTS</a>
-                        <div class="col-arrow">↓</div>
-                    </div>
-                </div>
-
-                <div class="feature-col">
-                    <div class="col-top">
-                        <span class="col-num">03</span>
-                        <div class="col-icon">
-                            <!-- Media / Play Icon -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="6 3 20 12 6 21 6 3"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-bottom">
-                        <h3 class="col-title">Media</h3>
-                        <a href="#" class="col-link">SHOW MORE</a>
-                        <div class="col-arrow">↓</div>
-                    </div>
-                </div>
-
-                <div class="feature-col">
-                    <div class="col-top">
-                        <span class="col-num">04</span>
-                        <div class="col-icon">
-                            <!-- Humanoid / Core Icon -->
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-bottom">
-                        <h3 class="col-title">Price</h3>
-                        <a href="#" class="col-link">BIO-COMPONENTS</a>
-                        <div class="col-arrow">↓</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SECTION 3: FOOTER CALL TO ACTION (Inspirowane dolnym panelem p3) -->
-        <section class="cta-section">
-            <div class="cta-bg-blend"></div>
-            <div class="cta-content">
-                <span class="cta-tag">BETTER THAN QUANTUM</span>
-                <h2 class="cta-logo">NEXUS</h2>
-                <span class="cta-sublogo">BIOCOMPUTER</span>
-                <div class="cta-action-box">
-                    <a href="#" class="btn-action outline">PRE-ORDER NOW <span class="arrow">→</span></a>
-                </div>
-            </div>
-        </section>
-    </main>
-
+    <!-- Podłączenie zewnętrznego pliku JS -->
     <script src="js/script.js"></script>
 </body>
 </html>

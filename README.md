@@ -1,1 +1,0 @@
-# SzynszylGitHub.github.io
