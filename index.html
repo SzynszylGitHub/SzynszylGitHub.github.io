@@ -4,143 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS - Kinematyka Ramienia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Podłączenie zewnętrznego pliku CSS -->
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap](https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap)" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- GŁÓWNY EKRAN (100vh) -->
-    <div class="dashboard">
-        <!-- HEADER -->
-        <header class="top-bar glass-panel">
-            <div class="logo-area">
-                <span class="icon-logo">⬢</span>
-                <h1>NEXUS // KINEMATYKA</h1>
-            </div>
-            <div class="global-stats">
-                <div class="stat"><span>TRYB PRACY</span><br><strong class="text-glow">ANATOMIA</strong></div>
-                <div class="stat"><span>ZASILANIE</span><br><strong>AKTYWNE</strong></div>
-            </div>
-        </header>
-
-        <div class="main-layout">
-            <!-- LEFT PANEL -->
-            <aside class="panel glass-panel left-panel">
-                <div class="panel-section">
-                    <h3>KOMPONENTY RAMIENIA</h3>
-                    <ul class="module-list">
-                        <li data-target="node-base"><span>01</span> Baza & Zasilanie</li>
-                        <li data-target="node-motor" class="active"><span>02</span> Serwomotor AC (Oś 1)</li>
-                        <li data-target="node-gearbox"><span>03</span> Przekładnia Falowa</li>
-                        <li data-target="node-effector"><span>04</span> Efektor & Sensory</li>
-                    </ul>
-                </div>
-                
-                <div class="panel-section" style="margin-top: auto;">
-                    <h3>OBCIĄŻENIE ZWIĄZKÓW (Kinematyka)</h3>
-                    <div class="mini-chart">
-                        <div class="bar-row"><span class="label">OŚ 1</span><div class="bar-wrap"><div class="bar" style="width: 90%"></div></div></div>
-                        <div class="bar-row"><span class="label">OŚ 2</span><div class="bar-wrap"><div class="bar" style="width: 65%"></div></div></div>
-                        <div class="bar-row"><span class="label">OŚ 3</span><div class="bar-wrap"><div class="bar" style="width: 40%"></div></div></div>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- CENTER DIAGRAM (Stylizowane Ramię Robota) -->
-            <main class="diagram-container glass-panel">
-                <svg viewBox="0 0 800 600" class="robot-svg" preserveAspectRatio="xMidYMid meet">
-                    <!-- Delikatne tło siatki -->
-                    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.05)"/>
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-
-                    <!-- RAMIĘ ROBOTA (Miękkie, zaokrąglone kształty) -->
-                    <g class="robot-arm" stroke="#334155" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                        <!-- Podstawa -->
-                        <path d="M 400 500 L 400 450" stroke="#1e293b" stroke-width="60"/>
-                        <!-- Ramię dolne -->
-                        <path d="M 400 450 Q 400 350 350 250" />
-                        <!-- Ramię górne -->
-                        <path d="M 350 250 Q 300 150 450 150" />
-                        <!-- Połączenie do efektora -->
-                        <path d="M 450 150 L 520 180" stroke-width="20" />
-                    </g>
-
-                    <!-- INTERAKTYWNE WĘZŁY (Hotspoty) -->
-                    <!-- Baza -->
-                    <g id="node-base" class="interactive-node">
-                        <circle cx="400" cy="480" r="35" class="node-bg" />
-                        <circle cx="400" cy="480" r="15" class="node-core" />
-                        <text x="450" y="485" class="node-label">BAZA</text>
-                    </g>
-
-                    <!-- Silnik / Oś 1 -->
-                    <g id="node-motor" class="interactive-node active">
-                        <circle cx="400" cy="400" r="25" class="node-bg" />
-                        <circle cx="400" cy="400" r="10" class="node-core" />
-                        <text x="340" y="405" class="node-label">SERWO AC</text>
-                    </g>
-
-                    <!-- Przekładnia -->
-                    <g id="node-gearbox" class="interactive-node">
-                        <circle cx="350" cy="250" r="30" class="node-bg" />
-                        <circle cx="350" cy="250" r="12" class="node-core" />
-                        <text x="270" y="255" class="node-label">PRZEKŁADNIA</text>
-                    </g>
-
-                    <!-- Efektor -->
-                    <g id="node-effector" class="interactive-node">
-                        <circle cx="520" cy="180" r="20" class="node-bg" />
-                        <circle cx="520" cy="180" r="8" class="node-core" />
-                        <text x="570" y="185" class="node-label">EFEKTOR</text>
-                    </g>
-                </svg>
-            </main>
-
-            <!-- RIGHT PANEL (Quick Preview) -->
-            <aside class="panel glass-panel right-panel">
-                <div class="panel-header">
-                    <span class="tag" id="preview-tag">NAPĘD</span>
-                    <h2 id="preview-title">Serwomotor AC (Bezszczotkowy)</h2>
-                </div>
-                
-                <p class="desc-text" id="preview-desc">
-                    Silnik prądu przemiennego z precyzyjną kontrolą pozycji (enkoder absolutny) i sprzężeniem zwrotnym wysokiej rozdzielczości.
-                </p>
-
-                <div class="action-area" style="margin-top: auto;">
-                    <button class="btn-primary rounded-btn" id="scroll-btn">ZOBACZ PROJEKT SILNIKA ↓</button>
-                </div>
-            </aside>
+    <!-- GÓRNY PASEK NAWIGACYJNY -->
+    <nav class="tech-navbar">
+        <div class="nav-brand">
+            <span class="icon-logo">⬢</span> NEXUS
         </div>
-    </div>
+        
+        <ul class="nav-menu module-list">
+            <li data-target="node-base">Baza & Zasilanie</li>
+            <li data-target="node-motor" class="active">Serwomotor AC</li>
+            <li data-target="node-gearbox">Przekładnia Falowa</li>
+            <li data-target="node-effector">Efektor & Sensory</li>
+        </ul>
+        
+        <div class="nav-actions">
+            <button class="nav-btn-action">SYSTEM ONLINE ↗</button>
+        </div>
+    </nav>
 
-    <!-- SEKCJA SZCZEGÓŁÓW (Poniżej ekranu głównego) -->
-    <section id="product-details" class="details-section">
-        <div class="details-content-wrapper">
-            <div class="details-header">
-                <span class="tech-label">ANALIZA KOMPONENTU</span>
-                <h2 id="detail-main-title">Serwomotor AC & Precyzyjna Kontrola</h2>
-            </div>
-
+    <!-- GŁÓWNY EKRAN: SEKCJA SZCZEGÓŁÓW (Kompaktowa) -->
+    <main id="product-details" class="details-section">
+        <div class="details-content-wrapper fade-transition">
             <div class="details-grid">
+                
                 <!-- LEWA STRONA: Obrazek Silnika -->
                 <div class="image-column">
                     <div class="image-container" id="detail-image-box">
-                        <!-- Świecący placeholder symulujący zdjęcie z referencji -->
                         <div class="glow-effect"></div>
                         
-                        <!-- TUTAJ MOŻESZ WSTAWIĆ SWOJE ZDJĘCIE (np. src="img/image_46c403.jpg"). Jeśli wstawisz ścieżkę, zmień display na "block" a placeholder poniżej na "none" -->
-                        <img src="" alt="" id="dynamic-img" style="display:none; width:100%; height:100%; object-fit:cover; border-radius: 16px; position: relative; z-index: 5;">
+                        <!-- ZDJĘCIE (Aby użyć: zmień display na "block" i ukryj .placeholder-content) -->
+                        <img src="" alt="" id="dynamic-img" style="display:none; width:100%; height:100%; object-fit:cover; position: relative; z-index: 5;">
                         
                         <div class="placeholder-content">
                             <span class="placeholder-icon">⚡</span>
                             <span class="blueprint-text" id="blueprint-text">WIZUALIZACJA: NAPĘD</span>
-                            <p style="font-size: 11px; opacity: 0.5; margin-top: 10px;">(Miejsce na plik graficzny silnika)</p>
                         </div>
                     </div>
                 </div>
@@ -148,7 +52,8 @@
                 <!-- PRAWA STRONA: Opis -->
                 <div class="info-column">
                     <div class="info-card glass-panel">
-                        <h3>ZASADA DZIAŁANIA</h3>
+                        <!-- Tytuł przeniesiony do wnętrza karty by oszczędzić miejsce -->
+                        <h3 id="detail-main-title">SERWOMOTOR AC & PRECYZYJNA KONTROLA</h3>
                         <p id="detail-full-desc" class="desc-text-large">
                             Wysokoobrotowy serwomotor AC z 3-fazowym zasilaniem. Dzięki wykorzystaniu enkodera absolutnego (szklana tarcza i sensor optyczny), układ zapewnia bezbłędne śledzenie pozycji kątowej nawet po zaniku zasilania. Zamknięta pętla sprzężenia zwrotnego (Feedback Loop) pozwala na ekstremalnie precyzyjne sterowanie ramieniem robota, minimalizując drgania i maksymalizując moment obrotowy.
                         </p>
@@ -174,14 +79,13 @@
                     </div>
 
                     <div class="action-row">
-                        <button class="btn-primary rounded-btn">PEŁNA DOKUMENTACJA</button>
+                        <button class="btn-primary sharp-btn">ZOBACZ PEŁNĄ DOKUMENTACJĘ ↗</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Podłączenie zewnętrznego pliku JS -->
     <script src="js/script.js"></script>
 </body>
 </html>
